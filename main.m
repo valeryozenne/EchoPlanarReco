@@ -62,7 +62,7 @@ addpath('/home/valery/Reseau/Valery/MatlabUnix/ismrm_sunrise_matlab-master/');
 
 % download the data and change the link below
 
-fully_sampled='N';
+fully_sampled='Y';
 
 if (strcmp(fully_sampled,'Y'))
     filename = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_FID82077.h5';
@@ -419,7 +419,6 @@ kspace.image=ifft_1D(kspace1D.image);
 close(figure(5))
 figure(5)
 c=1;
-
 subplot(222);imagesc(abs(kspace.image(:,:,c))); colormap(gray); title ('kspace image'); 
 subplot(224);imagesc(rsos(ifft_2D(kspace.image(:,:,:))));  title ('image image')
 
@@ -427,7 +426,6 @@ if (hdr.encoding.parallelImaging.accelerationFactor.kspace_encoding_step_1>1)
 subplot(221);imagesc(abs(kspace.calibration(:,:,c)));  title ('kspace calib')
 subplot(223);imagesc(rsos(ifft_2D(kspace.calibration(:,:,:))));   title ('image calibration')
 end
-
 print([figure_folder,'figure5'],'-dpng');
 % here we want to estimate the phase shift to correct ghost niqist artefact 
 % below the navigator scans of the calibration scans will be corrected, 

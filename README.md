@@ -71,6 +71,24 @@ Finally reconstruction is done for slice 1=1 , contrast =1, average =1, generali
 * calibration scan (24 lines using % Grappa 2 ) after ghost correction  
 * etc
 
+## Figure fully sampled dataset
+
+![Figure 2](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure2.png)
+
+![Figure 3](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure3.png)
+
+![Figure 5](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure5.png)
+
+![Figure 7](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure7.png)
+
+![Figure 8](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure8.png)
+
+![Figure 10](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure10.png)
+
+![Figure 11](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure11.png)
+
+![Figure 17](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_full_sampling/figure17.png)
+
 ## Figure undersampled dataset
 
 ![Figure 2](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure2.png)
@@ -78,3 +96,27 @@ Finally reconstruction is done for slice 1=1 , contrast =1, average =1, generali
 ![Figure 3](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure3.png)
 
 ![Figure 4](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure4.png)
+
+![Figure 5](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure5.png)
+
+![Figure 6](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure6.png)
+
+![Figure 7](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure7.png)
+
+![Figure 8](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure8.png)
+
+![Figure 10](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure10.png)
+
+![Figure 11](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure11.png)
+
+![Figure 12](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure12.png)
+
+![Figure 13](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure13.png)
+
+![Figure 14](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure14.png)
+
+![Figure 15](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure15.png)
+
+![Figure 16](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure16.png)
+
+![Figure 17](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure17.png)
