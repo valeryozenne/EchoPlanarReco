@@ -49,8 +49,6 @@
 % calibration scan (24 lines using % Grappa 2 ) after ghost correction   
 
 
-
-
 clear all
 
 % download the ismrm_sunrise_matlab-master https://github.com/hansenms/ismrm_sunrise_matlab
@@ -64,19 +62,22 @@ addpath('/home/valery/Reseau/Valery/MatlabUnix/ismrm_sunrise_matlab-master/');
 
 % download the data and change the link below
 
-% fully sample dataset
-% available from the gadgetron in test integration using the python script
-% get data.py 
-% filename = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_FID82077.h5';
-% filename_noise = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_NOISE82077.h5';
-% figure_folder='figures_full_sampling/'; 
+fully_sampled='N';
 
-
-% undersampled dataset with grappa 2
-% from my ftp server or send me an email
-filename = '/home/valery/Reseau/Imagerie/DICOM_DATA/2017-01-15_SMS/FID/00085_epi_RF_1dyn_GRAPPA2_FID10853.h5'
-filename_noise = '/home/valery/Reseau/Imagerie/DICOM_DATA/2017-01-15_SMS/FID/00085_epi_RF_1dyn_GRAPPA2_NOISEFID10853.h5';
-figure_folder='figures_grappa_sampling/';  
+if (strcmp(fully_sampled,'Y'))
+    filename = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_FID82077.h5';
+    filename_noise = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_NOISE82077.h5';
+    figure_folder='figures_full_sampling/';
+    % fully sample dataset
+    % available from the gadgetron in test integration using the python script
+    % get data.py
+else
+    filename = '/home/valery/Reseau/Imagerie/DICOM_DATA/2017-01-15_SMS/FID/00085_epi_RF_1dyn_GRAPPA2_FID10853.h5'
+    filename_noise = '/home/valery/Reseau/Imagerie/DICOM_DATA/2017-01-15_SMS/FID/00085_epi_RF_1dyn_GRAPPA2_NOISEFID10853.h5';
+    figure_folder='figures_grappa_sampling/';
+    % undersampled dataset with grappa 2
+    % from my ftp server or send me an email
+end
 
 mkdir(figure_folder) 
 
@@ -192,7 +193,7 @@ end
 
 
 figure(2)
-subplot(1,2,2);imagesc(abs(triangular_covariance_matrix(:,:))); colormap(gray); title('triangular covariance matrix');
+subplot(2,2,2);imagesc(abs(triangular_covariance_matrix(:,:))); colormap(gray); title('triangular covariance matrix');
 if (size(acq_noise_measurement,2)>0)
 subplot(2,2,1);imagesc(abs(dmtxTotalNormalize(:,:)));   title('covariance matrix');
 end

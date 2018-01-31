@@ -3,7 +3,7 @@ Matlab/Ismrmrd script for single-shot EPI reconstruction
 
 ## Purpose
 
-This is a simple example of how to reconstruct a single-shot EPI images from data  acquired on a fully sampled cartesian grid. The code is really similar to theses gadgets (sometimes it purely of c++-> matlab conversion):
+This is a simple example of how to reconstruct a single-shot EPI images from data. The code is really similar to theses gadgets (sometimes it purely of c++-> matlab conversion):
 
 * NoiseAdjustGadget.cpp NoiseAdjustGadget.h
 * EPIReconXGadget.cpp EPIReconXGadget.h
@@ -71,7 +71,10 @@ Finally reconstruction is done for slice 1=1 , contrast =1, average =1, generali
 * calibration scan (24 lines using % Grappa 2 ) after ghost correction  
 * etc
 
+## Figure undersampled dataset
 
+![Figure 2](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure2.png)
 
+![Figure 3](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure3.png)
 
-
+![Figure 4](https://github.com/valeryozenne/EchoPlanarReco/blob/master/figures_grappa_sampling/figure4.png)
