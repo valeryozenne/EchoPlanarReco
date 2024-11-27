@@ -246,8 +246,6 @@ size(meas.data)
 
 
 
-
-
 %% do the reco
 
 
@@ -264,10 +262,6 @@ acqs_image_all = find(  (meas.head.idx.contrast==(contrast-1)) ...
     & (meas.head.idx.set==(set-1))   );
 
 str_msg=sprintf('le nombre de lignes ACQ_IS_ ALL est  %d \n', size(acqs_image_all,2)); disp(str_msg);
-
-
-
-
 
 
 
@@ -320,59 +314,7 @@ subplot (2,3,1) ; imagesc(abs(mat.image.remove_oversampling(:,:,c))); colormap(g
 subplot (2,3,4) ; imagesc(angle(mat.image.remove_oversampling(:,:,c) ), [-pi pi]);
 
 
-% saveImageForBlog( double(im_pre_whitening_remove) ,'/home/valery/Tempo/', 'remove_', '.dat');
-%
-% maximum_value=max(abs(im_pca_maison(:)));
-% minimum_value=min(abs(im_pca_maison(:)));
-% createGnuplotFigureChannels('/home/valery/Documents/MATLAB/Reconstruction/', 'magnitude_remove', 1, 1 , [enc_Nx, enc_Ny] ,  1 , '/home/valery/Tempo/' , 1,minimum_value , maximum_value);
-%
-% maximum_value=max(angle(im_pca_maison(:)));
-% minimum_value=min(angle(im_pca_maison(:)));
-% createGnuplotFigureChannels('/home/valery/Documents/MATLAB/Reconstruction/', 'phase_remove', 1, 1 , [enc_Nx, enc_Ny] ,  1 , '/home/valery/Tempo/' , 1,minimum_value , maximum_value);
-
-
-
-
 %% partie PCA and coil compression (PCA coils gadgets)
-
-
-
-%% check data avant PCA
-if (strcmp(check_agreement_with_gadgetron,'Y'))
-    
-    gt.kspace.avant_pca=zeros(enc_Nx/2,enc_Ny, nCoils);
-    gt.kspace.apres_pca=zeros(enc_Nx/2,enc_Ny, nCoils);
-    
-    for p = 1:length(acqs_image_all)
-        
-        ky = meas.head.idx.kspace_encode_step_1(acqs_image_all(p)) + 1;
-        
-        str_msg=sprintf('p %d  acqs_image_all(p)  %d  ky  %d', p, acqs_image_all(p), ky);  disp(str_msg);
-        
-        str_e1=sprintf('%d',ky-1);
-        
-        filename=['/home/valery/Tempo/kspace_avant_pca_',str_e1,'_0.bin'];
-        [ tempo_gt ] = read_binary_complex( filename, enc_Nx/2*nCoils);
-        gt.kspace.avant_pca(:,ky,:)=reshape(tempo_gt, [enc_Nx/2 , nCoils]);
-        
-        
-        filename=['/home/valery/Tempo/kspace_apres_pca_',str_e1,'_0.bin'];
-        [ tempo_gt ] = read_binary_complex( filename, enc_Nx/2*nCoils);
-        gt.kspace.apres_pca(:,ky,:)=reshape(tempo_gt, [enc_Nx/2 , nCoils]);
-        
-    end
-      
-    c=1;
-    figure(30)
-    subplot (2,3,1) ; imagesc(abs(ifft_2D(gt.kspace.avant_pca(:,:,c)))); colormap(gray);
-    subplot (2,3,2) ; imagesc(abs(ifft_2D(mat.kspace.remove_oversampling(:,:,c))));
-    title('30: image apres pre whitening');
-    subplot (2,3,3) ; imagesc(abs(ifft_2D(mat.kspace.remove_oversampling(:,:,c)))-abs(ifft_2D(gt.kspace.avant_pca(:,:,c))));
-    subplot (2,3,4) ; imagesc(angle(ifft_2D(gt.kspace.avant_pca(:,:,c) )), [-pi pi]);
-    subplot (2,3,5) ; imagesc(angle(ifft_2D(mat.kspace.remove_oversampling(:,:,c))), [-pi pi]);
-    subplot (2,3,6) ; imagesc(angle(ifft_2D(mat.kspace.remove_oversampling(:,:,c)))-angle(ifft_2D(gt.kspace.avant_pca(:,:,c))), [-pi pi]);
-    
-end
 
 
 % pour effectuer la PCA rapidement sur le donnée , nous allons utliser
@@ -390,7 +332,7 @@ end
 
 % calcul de la matrice de transfert
 
-[ U , S, V , eigenvalues, eigenvalues_plot, nbLinesMaximumForPCA] = calculate_pca_basis(mat.kspace.remove_oversampling, meas,  acqs_image_all );
+[ U , S, V , eigenvalues, eigenvalues_plot, nbLinesMaximumForPCA] = calculate_pca_basis_generic(mat.kspace.remove_oversampling, meas,  acqs_image_all );
 
 % on applique la nouvelle base
 
@@ -402,38 +344,6 @@ end
 [ mat.image.pca ] = ifft_2D( mat.kspace.pca );
 
 
-
-if (strcmp(check_agreement_with_gadgetron,'Y'))
-    
-    clear matrix_KT
-    
-    filename='/home/valery/Tempo/honDKLT_0_0.bin';
-    [ tempo_gt ] = read_binary_complex( filename, nCoils*nCoils);
-    data_honDKLT=reshape(tempo_gt, [nCoils , nCoils]);
-    matrix_KT=data_honDKLT;
-    
-    figure(35)
-    subplot(2,3,1); imagesc(abs(U));
-    subplot(2,3,2); imagesc(abs(matrix_KT));
-    title('35: matrix_KT');
-    subplot(2,3,3); imagesc(abs(U)-abs(matrix_KT));
-    subplot(2,3,4); imagesc(angle(U), [-pi pi]);
-    subplot(2,3,5); imagesc(angle(matrix_KT), [-pi pi]);
-    subplot(2,3,6); imagesc(angle(U)-angle(matrix_KT), [-pi pi]);
-        
-    filename='/home/valery/Tempo/eigenvalue_0_0.bin';
-    [ tempo_gt ] = read_binary_complex( filename, nCoils);
-    data_eigenvalue=reshape(tempo_gt, [nCoils , 1]);
-    
-    filename='/home/valery/Tempo/eigenv_0_0.bin';
-    [ tempo_gt ] = read_binary_complex( filename, nCoils);
-    data_eigenv=reshape(tempo_gt, [nCoils , 1]);
-        
-    figure(36)
-    subplot(221); plot(abs(eigenvalues_plot(:,1))); hold on ;  plot(abs(data_eigenvalue(:,1)));
-    subplot(223); plot(angle(eigenvalues_plot(:,1))); hold on ;  plot(angle(data_eigenvalue(:,1)));
-     
-end
 
 
 figure(31)
@@ -448,18 +358,6 @@ subplot(6,6,c); imagesc(abs(ifft_2D(mat.kspace.pca(:,:,c)))); colormap(gray);
 end
 
 
-if (strcmp(check_agreement_with_gadgetron,'Y'))
-c=1;
-figure(31)
-subplot (2,3,1) ; imagesc(abs(ifft_2D(gt.kspace.apres_pca(:,:,c)))); colormap(gray);
-subplot (2,3,2) ; imagesc(abs(ifft_2D(mat.kspace.pca(:,:,c))));
-title('31: image apres pca');
-subplot (2,3,3) ; imagesc(abs(ifft_2D(mat.kspace.pca(:,:,c)))-abs(ifft_2D(gt.kspace.apres_pca(:,:,c))));
-subplot (2,3,4) ; imagesc(angle(ifft_2D(gt.kspace.apres_pca(:,:,c) )), [-pi pi]);
-subplot (2,3,5) ; imagesc(angle(ifft_2D(mat.kspace.pca(:,:,c))), [-pi pi]);
-subplot (2,3,6) ; imagesc(angle(ifft_2D(mat.kspace.pca(:,:,c)))-angle(ifft_2D(gt.kspace.apres_pca(:,:,c))), [-pi pi]);
-
-end
 
 
 mat.image.magnitude.sos = zeros(enc_Nx/2,enc_Ny);
@@ -476,6 +374,8 @@ mat.image.phase.sos = angle(sum_);
 figure(10)
 subplot(1,2,1);   imagesc(mat.image.magnitude.sos); colormap(gray)
 subplot(1,2,2);   imagesc(mat.image.phase.sos); colormap(gray)
+
+
 
 
 figure(9)
