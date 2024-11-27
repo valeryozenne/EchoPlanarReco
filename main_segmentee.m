@@ -67,11 +67,9 @@ fully_sampled='N';
 if (strcmp(fully_sampled,'Y'))
 %     filename = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_FID82077.h5';
 %     filename_noise = '/home/valery/DICOM/FID/meas_MID517_nih_ep2d_bold_fa60_NOISE82077.h5';
-    
-    filename = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00038_FID04597_gre_epi_single_shot.h5';
-    filename_noise = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00038_NOISE04597_gre_epi_single_shot.h5';
-   
-    
+
+    filename = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00045_FID04604_gre_epi_seg_facteur_13.h5'
+    filename_noise = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00045_NOISE04604_gre_epi_seg_facteur_13.h5'
     figure_folder='figures_full_sampling/';
     % fully sample dataset
     % available from the gadgetron in test integration using the python script
@@ -79,8 +77,9 @@ if (strcmp(fully_sampled,'Y'))
 else
     
     
-     filename = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00042_FID04601_gre_grappa2_epi_single_shot.h5'
-    filename_noise = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00042_NOISE04601_gre_grappa2_epi_single_shot.h5'
+    filename = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00046_FID04605_gre_grappa2_epi_seg_facteur_13.h5'
+    filename_noise = '/home/valeryozenne/mount/Imagerie/For_Valery/TP_reco/FID/meas_MID00046_NOISE04605_gre_grappa2_epi_seg_facteur_13.h5'
+ 
 %     filename = '/home/valery/Reseau/Imagerie/DICOM_DATA/2017-01-15_SMS/FID/00085_epi_RF_1dyn_GRAPPA2_FID10853.h5'
 %     filename_noise = '/home/valery/Reseau/Imagerie/DICOM_DATA/2017-01-15_SMS/FID/00085_epi_RF_1dyn_GRAPPA2_NOISEFID10853.h5';
     figure_folder='figures_grappa_sampling/';
